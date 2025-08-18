@@ -16,6 +16,9 @@
  ***********************************************************************************************
  */
 
+use Admidio\Documents\Entity\File;
+use Admidio\Infrastructure\Utils\SecurityUtils;
+
 require_once(__DIR__ . '/../../system/common.php');
 
 if(!defined('PLUGIN_FOLDER'))
@@ -35,7 +38,7 @@ if (!$gSettingsManager->getBool('documents_files_module_enabled'))
     // => EXIT
 }
 
-if (!$gCurrentUser->adminDocumentsFiles()) 
+if (!$gCurrentUser->isAdministratorDocumentsFiles()) 
 {
     $gMessage->show($gL10n->get('SYS_NO_RIGHTS'));
     // => EXIT
@@ -61,7 +64,7 @@ elseif ($getMode === 2)
         if ($getFileUuid !== '')
         {
             // get recordset of current file from database
-            $file = new TableFile($gDb);
+            $file = new File($gDb);
             $file->getFileForDownload($getFileUuid);
             
             if ($file->delete())

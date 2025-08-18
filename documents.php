@@ -5,13 +5,13 @@
  *
  * This plugin lists member related documents in the member profile.
  * 
- * Version 1.0
+ * Version 2.0 Beta 1
  * 
  * Version date: 01.03.2025
  * 
  * Author: rmb
  * 
- * Compatible with Admidio version 4.3
+ * Compatible with Admidio version 5.0
  *
  *
  * Usage:
@@ -29,10 +29,13 @@
  ***********************************************************************************************
  */
 
+use Admidio\Documents\Entity\Folder;
+use Admidio\Infrastructure\Utils\SecurityUtils;
+
 require_once(__DIR__ . '/../../system/common.php');
 require_once(__DIR__ . '/config.php'); 
 
-if (!$gCurrentUser->adminDocumentsFiles())
+if (!$gCurrentUser->isAdministratorDocumentsFiles())
 {
     return;
     // => EXIT
@@ -51,7 +54,7 @@ if ($plg_documents_maxPositions !== 0 && strlen($serialNumberOfMember) < $plg_do
 }
 
 // get recordset of documents folder from database
-$documentsFolder = new TableFolder($gDb);
+$documentsFolder = new Folder($gDb);
 $documentsFolder->readDataByUuid($plg_documents_folderUUID);
 
 // read all files in the documents folder
