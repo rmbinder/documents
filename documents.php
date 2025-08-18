@@ -65,7 +65,7 @@ $page->addHtml('<div class="card admidio-field-group" id="documents_box">
 
 $page->addHtml('<a class="btn btn-secondary float-right" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files/documents_files.php', array(
                     'folder_uuid' => $plg_documents_folderUUID)). '">
-                    <i class="fas fa-edit" ></i>' . $gL10n->get('SYS_EDIT') . '
+                    <i class="bi bi-pencil-square" ></i>' . $gL10n->get('SYS_EDIT') . '
     	        </a>');
 
 $page->addHtml('</div><div id="documents_box_body" class="card-body">');
@@ -92,12 +92,12 @@ foreach ($documents as $document)
         
         // Icon link to rename the file
         $page->addHtml('<a class="admidio-icon-link" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files/rename.php', array('folder_uuid' => $plg_documents_folderUUID, 'file_uuid' => $document['fil_uuid'])). '">
-                              <i class="fas fa-edit" data-toggle="tooltip" title="'.$gL10n->get('SYS_EDIT').'"></i>
+                              <i class="bi bi-pencil-square" data-toggle="tooltip" title="'.$gL10n->get('SYS_EDIT').'"></i>
                        </a>');
             
         // Icon link to move the file
         $page->addHtml('<a class="admidio-icon-link" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files/move.php', array('folder_uuid' => $plg_documents_folderUUID, 'file_uuid' => $document['fil_uuid'])). '">
-                              <i class="fas fa-folder" data-toggle="tooltip" title="'.$gL10n->get('SYS_MOVE_FILE').'"></i>
+                              <i class="bi bi-folder-symlink" data-toggle="tooltip" title="'.$gL10n->get('SYS_MOVE_FILE').'"></i>
                        </a>');
         
         // The icon link to delete the file works, but the page is not refreshed. The file is still displayed after deletion --> unusable
@@ -108,7 +108,7 @@ foreach ($documents as $document)
          
         // File deletion is therefore done via own script
         $page->addHtml('<a class="admidio-icon-link" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . PLUGIN_FOLDER . '/file_delete.php', array('mode' => 1, 'file_uuid' => $document['fil_uuid'], 'name' => $document['fil_name'] )). '">
-                              <i class="fas fa-trash-alt" data-toggle="tooltip" title="'.$gL10n->get('SYS_DELETE_FILE').'"></i>
+                              <i class="bi bi-trash" data-toggle="tooltip" title="'.$gL10n->get('SYS_DELETE_FILE').'"></i>
                        </a>');
                     
         $page->addHtml('</div>');//Float right
