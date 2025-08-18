@@ -63,10 +63,12 @@ $documents = $documentsFolder->getFilesWithProperties();
 $page->addHtml('<div class="card admidio-field-group" id="documents_box">
 				<div class="card-header">'.$gL10n->get('PLG_DOCUMENTS_HEADLINE'));
 
-$page->addHtml('<a class="btn btn-secondary float-right" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files/documents_files.php', array(
+$page->addHtml('<div style="text-align: right;float:right;">');
+$page->addHtml('<a class="btn btn-secondary float-right" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files.php', array(
                     'folder_uuid' => $plg_documents_folderUUID)). '">
                     <i class="bi bi-pencil-square" ></i>' . $gL10n->get('SYS_EDIT') . '
     	        </a>');
+$page->addHtml('</div>');//Float right
 
 $page->addHtml('</div><div id="documents_box_body" class="card-body">');
 
@@ -86,17 +88,22 @@ foreach ($documents as $document)
         $page->addHtml('<li class= "list-group-item">');
         $page->addHtml('<div style="text-align: left;float:left;">');
         
-        $page->addHtml('<a href="'.SecurityUtils::encodeUrl(ADMIDIO_URL.FOLDER_MODULES.'/documents-files/get_file.php', array('file_uuid' => $document['fil_uuid'], 'view' => 1)).'">'.$document['fil_name'].'</a>');
+        $page->addHtml('<a href="'.SecurityUtils::encodeUrl(ADMIDIO_URL.FOLDER_MODULES.'/documents-files.php', array('mode' => 'download', 'file_uuid' => $document['fil_uuid'], 'view' => 1)).'">'.$document['fil_name'].'</a>');
         
         $page->addHtml('</div><div style="text-align: right;float:right;">');
         
-        // Icon link to rename the file
-        $page->addHtml('<a class="admidio-icon-link" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files/rename.php', array('folder_uuid' => $plg_documents_folderUUID, 'file_uuid' => $document['fil_uuid'])). '">
+        // Icon link to show the file
+        $page->addHtml('<a class="admidio-icon-link" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files.php', array('mode' => 'download', 'file_uuid' => $document['fil_uuid'])). '">
+                              <i class="bi bi-download" data-toggle="tooltip" title="'.$gL10n->get('SYS_DOWNLOAD_FILE').'"></i>
+                       </a>');
+        
+        // Icon link to rename/edit the file
+        $page->addHtml('<a class="admidio-icon-link" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files.php', array('mode' => 'file_rename','folder_uuid' => $plg_documents_folderUUID, 'file_uuid' => $document['fil_uuid'])). '">
                               <i class="bi bi-pencil-square" data-toggle="tooltip" title="'.$gL10n->get('SYS_EDIT').'"></i>
                        </a>');
             
         // Icon link to move the file
-        $page->addHtml('<a class="admidio-icon-link" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files/move.php', array('folder_uuid' => $plg_documents_folderUUID, 'file_uuid' => $document['fil_uuid'])). '">
+        $page->addHtml('<a class="admidio-icon-link" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files.php', array('mode' => 'move','folder_uuid' => $plg_documents_folderUUID, 'file_uuid' => $document['fil_uuid'])). '">
                               <i class="bi bi-folder-symlink" data-toggle="tooltip" title="'.$gL10n->get('SYS_MOVE_FILE').'"></i>
                        </a>');
         
