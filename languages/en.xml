@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <string name="PLG_DOCUMENTS_FILE_DELETED">The file #VAR1_BOLD# is deleted.</string> 
-    <string name="PLG_DOCUMENTS_HEADLINE">Documents</string>    
-    <string name="PLG_DOCUMENTS_REALLY_DELETE">Do you really want to delete the file #VAR1_BOLD#?</string>     
+    <string name="PLG_DOCUMENTS_HEADLINE">Documents</string>       
 </resources>

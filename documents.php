@@ -107,17 +107,17 @@ foreach ($documents as $document)
                               <i class="bi bi-folder-symlink" data-toggle="tooltip" title="'.$gL10n->get('SYS_MOVE_FILE').'"></i>
                        </a>');
         
-        // The icon link to delete the file works, but the page is not refreshed. The file is still displayed after deletion --> unusable
-       /*     $page->addHtml('<a class="admidio-icon-link openPopup" href="javascript:void(0);"
-                data-href="'.SecurityUtils::encodeUrl(ADMIDIO_URL.'/adm_program/system/popup_message.php', 
-                    array('type' => 'fil', 'element_id' => $document['fil_uuid'], 'name' => $document['fil_name'], 'database_id' => $document['fil_uuid'], 'database_id_2' => $plg_documentdisplay_folderUUID)). '">
-                <i class="fas fa-trash-alt" data-toggle="tooltip" title="'.$gL10n->get('SYS_DELETE_FILE').'"></i></a>');*/
-         
-        // File deletion is therefore done via own script
-        $page->addHtml('<a class="admidio-icon-link" href="'. SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . PLUGIN_FOLDER . '/file_delete.php', array('mode' => 1, 'file_uuid' => $document['fil_uuid'], 'name' => $document['fil_name'] )). '">
-                              <i class="bi bi-trash" data-toggle="tooltip" title="'.$gL10n->get('SYS_DELETE_FILE').'"></i>
-                       </a>');
-                    
+        
+        
+        // Icon link to delete the file
+        // The icon link to delete the file works, but the page is not refreshed. The file is still displayed after deletion --> unusable (but will be used until a better solution is found)
+        $page->addHtml('
+                    <a class="admidio-icon-link admidio-messagebox" href="javascript:void(0);" data-buttons="yes-no"
+                         data-message="' . $gL10n->get('SYS_DELETE_ENTRY', array($document['fil_name'])) . '"
+                        data-href="callUrlHideElement(\'no_element\', \'' . SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files.php', 
+                            array('mode' => 'file_delete', 'file_uuid' => $document['fil_uuid'])) . '\', \'' . $gCurrentSession->getCsrfToken() . '\')">
+                        <i class="bi bi-trash" data-bs-toggle="tooltip" title="' . $gL10n->get('SYS_DELETE_FILE') . '"></i></a>');
+        
         $page->addHtml('</div>');//Float right
         $page->addHtml('<div style="clear:both"></div></li>');
     }
