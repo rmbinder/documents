@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <string name="PLG_DOCUMENTS_HEADLINE">Documents</string>       
+    <string name="PLG_DOCUMENTS_ACTORGONLY">only in the current organization</string>          
+    <string name="PLG_DOCUMENTS_ALLORG">in all organizations</string>
+    <string name="PLG_DOCUMENTS_CALLING_DIRECTLY_INFO">The plugin 'Documents' cannot be called directly. The installation routine extends the profile module with the menu item 'Documents'.\n\nTo install, run the following script: #VAR1#</string>
+    <string name="PLG_DOCUMENTS_CONFIG_DATA">Configuration data</string>
+    <string name="PLG_DOCUMENTS_EDIT_DOCUMENTS">Edit documents and files</string>
+    <string name="PLG_DOCUMENTS_FILE_CHANGES">File changes</string>  
+    <string name="PLG_DOCUMENTS_FILE_CHANGES_ALERT">This setting cannot be deselected.</string> 
+    <string name="PLG_DOCUMENTS_FILE_CHANGES_DESC">The file changes made during setup will be removed.</string>     
+    <string name="PLG_DOCUMENTS_FOLDERUUID">Document folder</string>
+    <string name="PLG_DOCUMENTS_FOLDERUUID_DESC">The member documents are read from this folder.</string> 
+    <string name="PLG_DOCUMENTS_HEADLINE">Documents</string>
+    <string name="PLG_DOCUMENTS_INSTALLMESSAGE">Installation of 'Documents' completed successfully.</string> 
+    <string name="PLG_DOCUMENTS_MAXPOSITIONS">Max. number of digits of the serial number</string>
+    <string name="PLG_DOCUMENTS_MAXPOSITIONS_DESC">The serial number is padded with zeros up to the maximum number of digits.\n\nAdmidio uses, for example, '1', '12' or '111' as the membership number (or serial number). However, for better sorting, the file names of the documents are used as '0001', '0012' or '0111'. The number set here specifies how many digits the serial number will be extended to by leading zeros.\n\nExample: The file name is '0015-Doe Jane-Membership Declaration.pdf' and the membership number in Admidio is 15. With a maximum number of digits of 4, the membership number becomes '0015' and a comparison is positive. If the serial number already contains more characters than defined, the serial number will not be changed (i.e., not truncated). If max. number of digits = 0, NO leading zeros are added, the serial number is used unchanged.</string> 
+    <string name="PLG_DOCUMENTS_REMOVE_CONFIG_DATA">Remove configuration data</string>     
+    <string name="PLG_DOCUMENTS_SEPARATOR">Separator</string> 
+    <string name="PLG_DOCUMENTS_SEPARATOR_DESC">If you are working with file names without leading zeros in the serial number, e.g. '12-Meier Albert-Membership Declaration.pdf' or '2-Meier Hilde-Membership Declaration.pdf', the separator can be used to split the file name into a serial number and the respective remainder. The first occurrence of the separator is searched for and the file name is split at this point. Example of a file name with the separator '-': '2-Meier Hilde-Mitgliedserklärung.pdf'. In this example, the file name is split into '2' and 'Meier Hilde-Mitgliedserklärung.pdf'. The number '2' is used for further comparison with the serial number (or user_id or user_uuid).</string> 
+    <string name="PLG_DOCUMENTS_SERIALNUMBERFIELD">Current number</string>
+    <string name="PLG_DOCUMENTS_SERIALNUMBERFIELD_DESC">Field or profile field with a current number (serial number).\n\nThe following options are available:\n- usr_id\n- usr_uuid\n- Profile field with a current number (e.g. membership number)</string> 
+    <string name="PLG_DOCUMENTS_SWITCH_TO_UNINSTALLATION">Switch to uninstall</string> 
+    <string name="PLG_DOCUMENTS_UNINST_DATA_DELETE_ERROR">- An error occurred while deleting the configuration data.\n</string>
+    <string name="PLG_DOCUMENTS_UNINST_DATA_DELETE_SUCCESS">- The configuration data created by the plugin has been deleted.\n</string>     
+    <string name="PLG_DOCUMENTS_UNINST_FILE_CHANGES_SUCCESS">- The file changes made by the plugin have been removed.\n</string> 
+    <string name="PLG_DOCUMENTS_UNINST_STARTMESSAGE">>The following deletions were performed:\n\n</string>   
+    <string name="PLG_DOCUMENTS_UNINST_TABLE_DELETE_ERROR">- The table "adm_plugin_preferences" could not be deleted because it houses more data from other plugins.\n</string>
+    <string name="PLG_DOCUMENTS_UNINST_TABLE_DELETE_SUCCESS">- The created table "adm_plugin_preferences" was deleted.\n</string>             
+    <string name="PLG_DOCUMENTS_UNINSTALLATION">Uninstall</string> 
+    <string name="PLG_DOCUMENTS_UNINSTALLATION_DESC">Entries created by the plugin can be deleted via uninstallation.</string>
 </resources>

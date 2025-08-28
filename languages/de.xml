@@ -1,4 +1,31 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <string name="PLG_DOCUMENTS_HEADLINE">Dokumente</string>    
+    <string name="PLG_DOCUMENTS_ACTORGONLY">nur in der aktuellen Organisation</string>          
+    <string name="PLG_DOCUMENTS_ALLORG">in allen Organisationen</string>
+    <string name="PLG_DOCUMENTS_CALLING_DIRECTLY_INFO">Das Plugin 'Documents' kann nicht direkt aufgerufen werden. Über die Installationsroutine wird das Profil-Modul um den Menüpunkt 'Dokumente' erweitert.\n\nZur Installation folgendes Script ausführen: #VAR1#</string>
+    <string name="PLG_DOCUMENTS_CONFIG_DATA">Konfigurationsdaten</string>
+    <string name="PLG_DOCUMENTS_EDIT_DOCUMENTS">Dokumente und Dateien bearbeiten</string>
+    <string name="PLG_DOCUMENTS_FILE_CHANGES">Dateiänderungen</string>  
+    <string name="PLG_DOCUMENTS_FILE_CHANGES_ALERT">Diese Einstellung kann nicht abgewählt werden.</string> 
+    <string name="PLG_DOCUMENTS_FILE_CHANGES_DESC">Die während des Setups durchgeführten Dateiänderungen werden wieder entfernt.</string>     
+    <string name="PLG_DOCUMENTS_FOLDERUUID">Dokumentenordner</string>
+    <string name="PLG_DOCUMENTS_FOLDERUUID_DESC">Aus diesem Ordner werden die Mitgliederdokumente ausgelesen.</string> 
+    <string name="PLG_DOCUMENTS_HEADLINE">Dokumente</string>
+    <string name="PLG_DOCUMENTS_INSTALLMESSAGE">Installation von 'Documents' erfolgreich durchgeführt.</string> 
+    <string name="PLG_DOCUMENTS_MAXPOSITIONS">Max. Stellenanzahl der laufenden Nummer</string>
+    <string name="PLG_DOCUMENTS_MAXPOSITIONS_DESC">Die laufende Nummer (Seriennummer) wird bis zur max. Stellenanzahl mit Nullen aufgefüllt.\n\nAls Mitgliedsnummer (bzw. Seriennummer) verwendet Admidio z. B. '1', '12' oder '111'. Für die Dateinamen der Dokumente benutzt man jedoch, zur besseren Sortierung, '0001', '0012' oder '0111'. Die hier eingestellte Zahl gibt an, auf wie viele Stellen die Seriennummer durch führende Nullen erweitert wird.\n\nBeispiel: Der Dateiname lautet '0015-Doe Jane-Mitgliedserklärung.pdf' und die Mitgliedsnummer in Admidio ist 15. Mit max. Stellenanzahl = 4 wird die Mitgliedsnummer zu '0015' und ein Vergleich fällt positiv aus. Wenn die Seriennummer bereits mehr Zeichen enthält als definiert werden, wird die Seriennummer nicht geändert (d. h. nicht gekürzt). Wenn max. Stellenanzahl = 0 ist, werden KEINE führenden Nullen hinzugefügt, die Seriennummer wird unverändert verwendet.</string> 
+    <string name="PLG_DOCUMENTS_REMOVE_CONFIG_DATA">Entferne Konfigurationsdaten</string>     
+    <string name="PLG_DOCUMENTS_SEPARATOR">Trennzeichen</string> 
+    <string name="PLG_DOCUMENTS_SEPARATOR_DESC">Wird mit Dateinamen ohne führende Nullen in der laufenden Nummer gearbeitet, z.B. '12-Meier Albert-Mitgliedserklärung.pdf' oder '2-Meier Hilde-Mitgliedserklärung.pdf', so kann mit dem Trennzeichen der Dateiname in eine laufende Nummer und den jeweiligen Rest aufgeteilt werden. Dabei wird nach dem ersten Vorkommen des Trennzeichens gesucht und der Dateiname an dieser Stelle getrennt. Beispiel für einen Dateinamen mit dem Trennzeichen '-': '2-Meier Hilde-Mitgliedserklärung.pdf'. In diesem Beispiel wird der Dateiname in '2' und 'Meier Hilde-Mitgliedserklärung.pdf' aufgeteilt. Die Zahl '2' dient zum weiteren Vergleich mit der laufenden Nummer (bzw. user_id oder user_uuid).</string> 
+    <string name="PLG_DOCUMENTS_SERIALNUMBERFIELD">Laufende Nummer</string>
+    <string name="PLG_DOCUMENTS_SERIALNUMBERFIELD_DESC">Feld oder Profilfeld mit einer laufenden Nummer (Seriennummer).\n\nFolgende Optionen sind verfügbar:\n- usr_id\n- usr_uuid\n- Profilfeld mit einer laufenden Nummer (z.B. Mitgliedsnummer)</string> 
+    <string name="PLG_DOCUMENTS_SWITCH_TO_UNINSTALLATION">Wechsel zur Deinstallation</string> 
+    <string name="PLG_DOCUMENTS_UNINST_DATA_DELETE_ERROR">- Beim Löschen der Konfigurationsdaten ist ein Fehler aufgetreten.\n</string>
+    <string name="PLG_DOCUMENTS_UNINST_DATA_DELETE_SUCCESS">- Die vom Plugin angelegten Konfigurationsdaten wurden gelöscht.\n</string>     
+    <string name="PLG_DOCUMENTS_UNINST_FILE_CHANGES_SUCCESS">- Die vom Plugin durchgeführten Dateiänderungen wurden wieder entfernt.\n</string> 
+    <string name="PLG_DOCUMENTS_UNINST_STARTMESSAGE">Folgende Löschvorgänge wurden durchgeführt:\n\n</string>   
+    <string name="PLG_DOCUMENTS_UNINST_TABLE_DELETE_ERROR">- Die Tabelle "adm_plugin_preferences" konnte nicht gelöscht werden, da sich darin noch Daten eines anderen Plugins befinden.\n</string>
+    <string name="PLG_DOCUMENTS_UNINST_TABLE_DELETE_SUCCESS">- Die vom Plugin angelegte Tabelle "adm_plugin_preferences" wurde gelöscht.\n</string>             
+    <string name="PLG_DOCUMENTS_UNINSTALLATION">Deinstallation</string> 
+    <string name="PLG_DOCUMENTS_UNINSTALLATION_DESC">Über die Deinstallation können vom Plugin erzeugte Einträge gelöscht werden.</string> 
 </resources>
