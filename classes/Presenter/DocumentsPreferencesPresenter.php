@@ -100,7 +100,7 @@ class DocumentsPreferencesPresenter extends PagePresenter
         
         $formSettings = new FormPresenter(
             'adm_preferences_form_settings',
-            '../templates/preferences.options.plugin.documents.tpl',
+            '../templates/preferences.plugin.documents.tpl',
             SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . '/Documents/system/preferences.php', array('mode' => 'save', 'panel' => 'Settings')),
             null,
             array('class' => 'form-preferences')
@@ -177,7 +177,7 @@ class DocumentsPreferencesPresenter extends PagePresenter
         $smarty = $this->getSmartyTemplate();
         $formSettings->addToSmarty($smarty);
         $gCurrentSession->addFormObject($formSettings);
-        return $smarty->fetch('../templates/preferences.options.plugin.documents.tpl');
+        return $smarty->fetch('../templates/preferences.plugin.documents.tpl');
     }
     
     /**

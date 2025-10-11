@@ -29,7 +29,7 @@ class DocumentsPreferencesService
      */
     public function save(string $panel, array $formData)
     {
-        global $gL10n, $gSettingsManager, $gCurrentSession, $gDb, $gCurrentOrgId, $gProfileFields, $gLogger;
+        global $gL10n;
         
         require_once(__DIR__ . '/../../system/common_function.php');
         $pPreferences = new ConfigTable();
@@ -46,17 +46,6 @@ class DocumentsPreferencesService
                 $pPreferences->config['settings']['maxPositions'] = $_POST['documents_maxPositions'];	
                 $pPreferences->config['settings']['separator'] = $_POST['documents_separator'];
            	break; 
-
-            case 'Access':
-                if (isset($formData['access_preferences']))
-                {
-                    $pPreferences->config['access']['preferences'] = array_values(array_filter($formData['access_preferences']));
-                }
-                else
-                {
-                    $pPreferences->config['access']['preferences'] = array();
-                }
-                break;
 
         }
         $pPreferences->save();

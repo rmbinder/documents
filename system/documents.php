@@ -21,7 +21,6 @@ if (basename($_SERVER['SCRIPT_FILENAME']) === 'documents.php') {
 
 require_once(__DIR__ . '/../../../system/common.php');
 require_once(__DIR__ . '/common_function.php');
-//require_once(__DIR__ . '/config.php'); 
 
 $pPreferences = new ConfigTable();
 $pPreferences->read();
