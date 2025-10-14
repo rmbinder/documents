@@ -1,7 +1,7 @@
 <?php
 /**
  ***********************************************************************************************
- * Versionsdatei fuer das Admidio-Plugin documents
+ * Version file for the Admidio plugin documents
  *
  * @copyright rmb
  * @see https://github.com/rmbinder/documents/
@@ -9,5 +9,9 @@
  ***********************************************************************************************
  */
 
+if (basename($_SERVER['SCRIPT_FILENAME']) === 'version.php') {
+    exit('This page may not be called directly!');
+}
+
 $plugin_version = '2.0 Beta 1';
-$plugin_stand 	= '11.10.2025';
+$plugin_stand 	= '14.10.2025';

@@ -24,6 +24,11 @@ try {
     require_once(__DIR__ . '/../../../system/common.php');
     require_once(__DIR__ . '/common_function.php');
 
+    // only administrators are allowed to start this module
+    if (!$gCurrentUser->isAdministrator()) {
+        throw new Exception('SYS_NO_RIGHTS');
+    }
+    
     // Initialize and check the parameters
     $getMode = admFuncVariableIsValid($_GET, 'mode', 'string',
         array(
@@ -32,11 +37,6 @@ try {
         )
     );
     $getPanel = admFuncVariableIsValid($_GET, 'panel', 'string');
-
-    // only administrators are allowed to view, edit organization preferences or create new organizations
-    if (!$gCurrentUser->isAdministrator()) {
-        throw new Exception('SYS_NO_RIGHTS');
-    }
 
     switch ($getMode) {
         case 'html':
