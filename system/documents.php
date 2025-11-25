@@ -104,7 +104,7 @@ $page->assignSmartyVariable('documentsTemplateData', $documentsTemplateData);
 $page->assignSmartyVariable('urlDocumentsFiles', SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_MODULES . '/documents-files.php', array(
     'folder_uuid' => $pPreferences->config['settings']['folderUUID']
 )));
-$page->assignSmartyVariable('urlDocumentsPreferences', SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . '/Documents/system/preferences.php'));
+$page->assignSmartyVariable('urlDocumentsPreferences', SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . PLUGIN_FOLDER . '/system/preferences.php'));
 $page->assignSmartyVariable('showDocumentsOnProfile', $gCurrentUser->isAdministratorDocumentsFiles());
 
 	

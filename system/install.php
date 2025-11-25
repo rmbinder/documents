@@ -25,7 +25,7 @@ try {
     }
 
     $zeilenumbruch = "\r\n";
-
+    
     // ADMIDIO_URL auch möglich, aber dann wird 'allow_url_open' (PHP.ini) benötigt
     $templateFile = ADMIDIO_PATH . FOLDER_THEMES . '/simple/templates/modules/profile.view';
     try {
@@ -35,9 +35,9 @@ try {
             $templateString = file_get_contents($templateFile . '.tpl');
 
             $substArray = array(
-                '{if $showRelations}' => '{include file="../../../../adm_plugins/Documents/templates/profile.view.include.button.plugin.documents.tpl"}',
-                '<!-- User Relations Tab -->' => '{include file="../../../../adm_plugins/Documents/templates/profile.view.include.documents.tab.plugin.documents.tpl"}',
-                '<!-- User Relations Accordion -->' => '{include file="../../../../adm_plugins/Documents/templates/profile.view.include.documents.accordion.plugin.documents.tpl"}'
+                '{if $showRelations}' => '{include file="../../../..' . FOLDER_PLUGINS . PLUGIN_FOLDER  .'/templates/profile.view.include.button.plugin.documents.tpl"}',
+                '<!-- User Relations Tab -->' => '{include file="../../../..' . FOLDER_PLUGINS . PLUGIN_FOLDER  .'/templates/profile.view.include.documents.tab.plugin.documents.tpl"}',
+                '<!-- User Relations Accordion -->' => '{include file="../../../..' . FOLDER_PLUGINS . PLUGIN_FOLDER  .'/templates/profile.view.include.documents.accordion.plugin.documents.tpl"}'
             );
 
             foreach ($substArray as $needle => $subst) {
@@ -63,7 +63,7 @@ try {
             $profileString = file_get_contents($profileFile . '.php');
 
             $needle = '$page->show();';
-            $subst = "require_once(ADMIDIO_PATH . FOLDER_PLUGINS .'/Documents/system/documents.php');";
+            $subst = "require_once(ADMIDIO_PATH . FOLDER_PLUGINS .'" .PLUGIN_FOLDER . "/system/documents.php');";
 
             $profileString = substr_replace($profileString, $subst . $zeilenumbruch, strpos($profileString, $needle), 0);
             file_put_contents($profileFile . '.php', $profileString);

@@ -129,7 +129,7 @@ class DocumentsPreferencesPresenter extends PagePresenter
         $pPreferences = new ConfigTable();
         $pPreferences->read();
 
-        $formSettings = new FormPresenter('adm_preferences_form_settings', '../templates/preferences.plugin.documents.tpl', SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . '/Documents/system/preferences.php', array(
+        $formSettings = new FormPresenter('adm_preferences_form_settings', '../templates/preferences.plugin.documents.tpl', SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . PLUGIN_FOLDER . '/system/preferences.php', array(
             'mode' => 'save',
             'panel' => 'Settings'
         )), null, array(
@@ -294,7 +294,7 @@ class DocumentsPreferencesPresenter extends PagePresenter
                 // Schritt 1: Spinner einfügen
                 panelContainer.html("<div class=\"d-flex justify-content-center align-items-center\" style=\"height: 200px;\"><div class=\"spinner-border text-primary\" role=\"status\"><span class=\"visually-hidden\">Lade...</span></div></div>");
 
-                $.get("' . ADMIDIO_URL . FOLDER_PLUGINS . '/Documents/system/preferences.php", {
+                $.get("' . ADMIDIO_URL . FOLDER_PLUGINS . PLUGIN_FOLDER . '/system/preferences.php", {
                     mode: "html_form",
                     panel: panelId
                 }, function(htmlContent) {
@@ -323,7 +323,7 @@ class DocumentsPreferencesPresenter extends PagePresenter
                     event.preventDefault();
                     var versionInfoContainer = panelContainer.find("#adm_version_content");
                     versionInfoContainer.html("<i class=\"spinner-border spinner-border-sm\"></i>").show();
-                    $.get("' . ADMIDIO_URL . FOLDER_PLUGINS . '/Documents/system/preferences.php", { mode: "update_check" }, function(htmlVersion) {
+                    $.get("' . ADMIDIO_URL . FOLDER_PLUGINS . PLUGIN_FOLDER . '/system/preferences.php", { mode: "update_check" }, function(htmlVersion) {
                         versionInfoContainer.html(htmlVersion);
                     });
                 });
@@ -333,7 +333,7 @@ class DocumentsPreferencesPresenter extends PagePresenter
                     event.preventDefault();
                     var statusContainer = panelContainer.find("#directory_protection_status");
                     statusContainer.html("<i class=\"spinner-border spinner-border-sm\"></i>").show();
-                    $.get("' . ADMIDIO_URL . FOLDER_PLUGINS . '/Documents/system/preferences.php", { mode: "htaccess" }, function(statusText) {
+                    $.get("' . ADMIDIO_URL . FOLDER_PLUGINS . PLUGIN_FOLDER . '/system/preferences.php", { mode: "htaccess" }, function(statusText) {
                         var directoryProtection = panelContainer.find("#directoryProtection");
                         directoryProtection.html("<span class=\"text-success\"><strong>" + statusText + "</strong></span>");
                     });
