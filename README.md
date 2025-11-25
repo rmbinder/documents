@@ -1,6 +1,6 @@
-# documents
+# Documents
 
-'documents' is an Admidio plugin. It allows you to display user-related documents in a member's profile.
+'Documents' is an Admidio plugin. It allows you to display user-related documents in a member's profile.
 
 Several requirements must be met for this to happen:
   
@@ -17,3 +17,9 @@ Several requirements must be met for this to happen:
          (Note: The Membership Fee plugin can create corresponding membership numbers)
          
 The plugin checks whether the sequential number of a document matches the member number (usr_id, usr_uuid or member numer) and then displays the document.
+
+### Installation and Update
+
+1. Create a folder named 'Documents' under adm_plugins
+2. Copy all plugin files into this folder (If the folder already exists, you only need to replace all the files within it.)
+3. To install (or update) , run the following PHP file: .../adm_plugins/Documents/system/install.php
