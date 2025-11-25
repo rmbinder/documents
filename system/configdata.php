@@ -42,8 +42,6 @@ $config_default['settings']['separator'] = '';
       
 $config_default['Plugininformationen']['version'] = '';
 $config_default['Plugininformationen']['stand'] = '';
-$config_default['Plugininformationen']['table_name'] = '';
-$config_default['Plugininformationen']['shortcut'] = '';
 
 /*
  *  Mittels dieser Zeichenkombination werden Konfigurationsdaten, die zur Laufzeit als Array verwaltet werden,

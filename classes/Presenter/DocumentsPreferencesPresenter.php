@@ -18,7 +18,6 @@
  * @see https://github.com/rmbinder/documents/
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License v2.0 only
  */
-
 namespace Plugins\Documents\classes\Presenter;
 
 use Admidio\Changelog\Service\ChangelogService;
@@ -32,25 +31,30 @@ use Plugins\Documents\classes\Config\ConfigTable;
 
 class DocumentsPreferencesPresenter extends PagePresenter
 {
+
     /**
+     *
      * @var array Array with all possible entries for the preferences.
-     *            Each entry consists of an array that has the following structure:
-     *            array ('key' => 'xzy', 'label' => 'xyz', 'panels' => array('id' => 'xyz', 'title' => 'xyz', 'icon' => 'xyz'))
-     * 
-     *            There are thwo different visualizations of the preferences:
-     *              1) a nested tab structure (main tabs created by 'key' and 'label' and sub tabs created by 'panels')
-     *              2) a accordion structure when the @media query (max-width: 768px) is active ('key' and 'label' are used for card header
-     *                 and 'panels' for accordions inside the card) 
+     *      Each entry consists of an array that has the following structure:
+     *      array ('key' => 'xzy', 'label' => 'xyz', 'panels' => array('id' => 'xyz', 'title' => 'xyz', 'icon' => 'xyz'))
+     *     
+     *      There are thwo different visualizations of the preferences:
+     *      1) a nested tab structure (main tabs created by 'key' and 'label' and sub tabs created by 'panels')
+     *      2) a accordion structure when the @media query (max-width: 768px) is active ('key' and 'label' are used for card header
+     *      and 'panels' for accordions inside the card)
      */
     protected array $preferenceTabs = array();
+
     /**
+     *
      * @var string Name of the preference panel that should be shown after page loading.
-     *             If this parameter is empty, then show the common preferences.
+     *      If this parameter is empty, then show the common preferences.
      */
     protected string $preferencesPanelToShow = '';
 
     /**
      * Constructor that initializes the class member parameters
+     *
      * @throws Exception
      */
     public function __construct(string $panel = '')
@@ -67,26 +71,53 @@ class DocumentsPreferencesPresenter extends PagePresenter
     }
 
     /**
+     *
      * @throws Exception
      */
     private function initialize(): void
     {
         global $gL10n;
         $this->preferenceTabs = array(
-           
-            // === 1) System ===
+
+            // === 1) Configuration ===
             array(
-                'key'    => 'system',
-                'label'  => '',
+                'key' => 'system',
+                'label' => $gL10n->get('SYS_SETTINGS'),
                 'panels' => array(
-                    array('id'=>'settings',  'title'=>$gL10n->get('PLG_DOCUMENTS_HEADLINE'),   'icon'=>'bi-gear',     'subcards'=>false),           
-                ),
+                    array(
+                        'id' => 'settings',
+                        'title' => $gL10n->get('PLG_DOCUMENTS_NAME'),
+                        'icon' => 'bi-gear',
+                        'subcards' => false
+                    )
+                )
             ),
+
+            // === 2) System ===
+            array(
+                'key' => 'system',
+                'label' => $gL10n->get('SYS_SYSTEM'),
+                'panels' => array(
+                    array(
+                        'id' => 'informations',
+                        'title' => $gL10n->get('SYS_INFORMATIONS'),
+                        'icon' => 'bi-info-circle',
+                        'subcards' => false
+                    ),
+                    array(
+                        'id' => 'uninstallation',
+                        'title' => $gL10n->get('PLG_DOCUMENTS_UNINSTALLATION'),
+                        'icon' => 'bi-trash',
+                        'subcards' => false
+                    )
+                )
+            )
         );
     }
 
     /**
      * Generates the html of the form from the options preferences and will return the complete html.
+     *
      * @return string Returns the complete html of the form from the options preferences.
      * @throws Exception
      * @throws \Smarty\Exception
@@ -94,95 +125,112 @@ class DocumentsPreferencesPresenter extends PagePresenter
     public function createSettingsForm(): string
     {
         global $gL10n, $gSettingsManager, $gCurrentSession, $gDb, $gProfileFields;
-        
+
         $pPreferences = new ConfigTable();
         $pPreferences->read();
-        
-        $formSettings = new FormPresenter(
-            'adm_preferences_form_settings',
-            '../templates/preferences.plugin.documents.tpl',
-            SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . '/Documents/system/preferences.php', array('mode' => 'save', 'panel' => 'Settings')),
-            null,
-            array('class' => 'form-preferences')
-        );
-        
+
+        $formSettings = new FormPresenter('adm_preferences_form_settings', '../templates/preferences.plugin.documents.tpl', SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . '/Documents/system/preferences.php', array(
+            'mode' => 'save',
+            'panel' => 'Settings'
+        )), null, array(
+            'class' => 'form-preferences'
+        ));
+
         $folder = new Folder($gDb);
         $folder->readDataByUuid($pPreferences->config['settings']['folderUUID']);
- 
-        $html = '<a class="btn btn-secondary" href="' . ADMIDIO_URL . FOLDER_PLUGINS . '/Documents/system/uninstallation.php">
-                    <i class="bi bi-trash"></i>' . $gL10n->get('PLG_DOCUMENTS_SWITCH_TO_UNINSTALLATION') . '
-                </a>';
-        $formSettings->addCustomContent(
-            'editProfileFields',
-            $gL10n->get('PLG_DOCUMENTS_UNINSTALLATION'),
-            $html,
-            array('helpTextId' => 'PLG_DOCUMENTS_UNINSTALLATION_DESC', 'alertWarning' => $gL10n->get('ORG_NOT_SAVED_SETTINGS_LOST'))
-        );
-        
+
         $documentsService = new DocumentsService($gDb, $pPreferences->config['settings']['folderUUID']);
         $folders = $documentsService->getUploadableFolderStructure();
-    
-        $formSettings->addSelectBox(
-            'documents_folder_uuid',
-            $gL10n->get('PLG_DOCUMENTS_FOLDERUUID'),
-            $folders,
-            array(
-                'property' => FormPresenter::FIELD_REQUIRED,
-                'defaultValue' => $pPreferences->config['settings']['folderUUID'],
-                'helpTextId' => 'PLG_DOCUMENTS_FOLDERUUID_DESC',
-                'showContextDependentFirstEntry' => false
-            )
+
+        $formSettings->addSelectBox('documents_folder_uuid', $gL10n->get('PLG_DOCUMENTS_FOLDERUUID'), $folders, array(
+            'property' => FormPresenter::FIELD_REQUIRED,
+            'defaultValue' => $pPreferences->config['settings']['folderUUID'],
+            'helpTextId' => 'PLG_DOCUMENTS_FOLDERUUID_DESC',
+            'showContextDependentFirstEntry' => false
+        ));
+
+        $serNumField = array(
+            'usr_id' => 'usr_id',
+            'usr_uuid' => 'usr_uuid'
         );
-        
-        $serNumField = array('usr_id' => 'usr_id' , 'usr_uuid' => 'usr_uuid');
-    
+
         // create array with all fields that could be imported
-        foreach ($gProfileFields->getProfileFields() as $field) 
-        {
-            $serNumField[$field->getValue('usf_name_intern')] =  $field->getValue('usf_name');
+        foreach ($gProfileFields->getProfileFields() as $field) {
+            $serNumField[$field->getValue('usf_name_intern')] = $field->getValue('usf_name');
         }
 
-        $formSettings->addSelectBox(
-            'documents_serialNumberField',
-            $gL10n->get('PLG_DOCUMENTS_SERIALNUMBERFIELD'),
-            $serNumField,
-            array(
-                'property' => FormPresenter::FIELD_REQUIRED,
-                'defaultValue' => $pPreferences->config['settings']['serialNumberField'],
-                'helpTextId' => 'PLG_DOCUMENTS_SERIALNUMBERFIELD_DESC',
-                'showContextDependentFirstEntry' => false
-            )
-        );
+        $formSettings->addSelectBox('documents_serialNumberField', $gL10n->get('PLG_DOCUMENTS_SERIALNUMBERFIELD'), $serNumField, array(
+            'property' => FormPresenter::FIELD_REQUIRED,
+            'defaultValue' => $pPreferences->config['settings']['serialNumberField'],
+            'helpTextId' => 'PLG_DOCUMENTS_SERIALNUMBERFIELD_DESC',
+            'showContextDependentFirstEntry' => false
+        ));
 
-        $formSettings->addInput(
-            'documents_maxPositions',
-            $gL10n->get('PLG_DOCUMENTS_MAXPOSITIONS'),
-            $pPreferences->config['settings']['maxPositions'],
-            array('type' => 'number', 'minNumber' => 0, 'maxNumber' => 10, 'step' => 1, 'helpTextId' => 'PLG_DOCUMENTS_MAXPOSITIONS_DESC')
-        );
-    
-        $formSettings->addInput(
-            'documents_separator',
-            $gL10n->get('PLG_DOCUMENTS_SEPARATOR'),
-            $pPreferences->config['settings']['separator'],
-            array( 'maxLength' => 1, 'helpTextId' => 'PLG_DOCUMENTS_SEPARATOR_DESC')
-        );
-    
-        $formSettings->addSubmitButton(
-            'adm_button_save_options',
-            $gL10n->get('SYS_SAVE'),
-            array('icon' => 'bi-check-lg', 'class' => 'offset-sm-3')
-        );
+        $formSettings->addInput('documents_maxPositions', $gL10n->get('PLG_DOCUMENTS_MAXPOSITIONS'), $pPreferences->config['settings']['maxPositions'], array(
+            'type' => 'number',
+            'minNumber' => 0,
+            'maxNumber' => 10,
+            'step' => 1,
+            'helpTextId' => 'PLG_DOCUMENTS_MAXPOSITIONS_DESC'
+        ));
+
+        $formSettings->addInput('documents_separator', $gL10n->get('PLG_DOCUMENTS_SEPARATOR'), $pPreferences->config['settings']['separator'], array(
+            'maxLength' => 1,
+            'helpTextId' => 'PLG_DOCUMENTS_SEPARATOR_DESC'
+        ));
+
+        $formSettings->addSubmitButton('adm_button_save_options', $gL10n->get('SYS_SAVE'), array(
+            'icon' => 'bi-check-lg',
+            'class' => 'offset-sm-3'
+        ));
 
         $smarty = $this->getSmartyTemplate();
         $formSettings->addToSmarty($smarty);
         $gCurrentSession->addFormObject($formSettings);
         return $smarty->fetch('../templates/preferences.plugin.documents.tpl');
     }
-    
+
+    /**
+     * Generates the html of the form from the deinstallation preferences and will return the complete html.
+     *
+     * @return string Returns the complete html of the form from the configurations preferences.
+     * @throws Exception
+     * @throws \Smarty\Exception
+     */
+    public function createUninstallationForm(): string
+    {
+        $this->assignSmartyVariable('open_uninstall', SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . PLUGIN_FOLDER . '/system/uninstall.php'));
+        $smarty = $this->getSmartyTemplate();
+        return $smarty->fetch('../templates/preferences.uninstall.plugin.documents.tpl');
+    }
+
+    /**
+     * Generates the html of the form from the informations preferences and will return the complete html.
+     *
+     * @return string Returns the complete html of the form from the informations preferences.
+     * @throws Exception
+     * @throws \Smarty\Exception
+     */
+    public function createInformationsForm(): string
+    {
+        global $gL10n;
+
+        $pPreferences = new ConfigTable();
+        $pPreferences->read();
+
+        $this->assignSmartyVariable('plg_name', $gL10n->get('PLG_DOCUMENTS_NAME'));
+        $this->assignSmartyVariable('plg_version', $pPreferences->config['Plugininformationen']['version']);
+        $this->assignSmartyVariable('plg_date', $pPreferences->config['Plugininformationen']['stand']);
+
+        $smarty = $this->getSmartyTemplate();
+        return $smarty->fetch('../templates/preferences.informations.plugin.documents.tpl');
+    }
+
     /**
      * Set a panel name that should be opened at a page load.
-     * @param string $panelName Name of the panel that should be opened at a page load.
+     *
+     * @param string $panelName
+     *            Name of the panel that should be opened at a page load.
      * @return void
      */
     public function setPanelToShow(string $panelName): void
@@ -193,7 +241,8 @@ class DocumentsPreferencesPresenter extends PagePresenter
     /**
      * Read all available registrations from the database and create the HTML content of this
      * page with the Smarty template engine and write the HTML output to the internal
-     * parameter **$pageContent**. If no registration is found, then show a message to the user.
+     * parameter **$pageContent**.
+     * If no registration is found, then show a message to the user.
      */
     public function show(): void
     {
@@ -371,7 +420,7 @@ class DocumentsPreferencesPresenter extends PagePresenter
             // === 5) Formular-Submit per AJAX ===
             $(document).on("submit", "form[id^=\"adm_preferences_form_\"]", formSubmit);
       ', true);
-      
+
         ChangelogService::displayHistoryButton($this, 'preferences', 'preferences,texts');
 
         // Load the select2 in case any of the form uses a select box. Unfortunately, each section
