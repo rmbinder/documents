@@ -3,7 +3,7 @@
  ***********************************************************************************************
  * Documents / Dokumente
  *
- * Version 2.0 Beta 1
+ * Version 2.0
  *
  * This plugin lists member related documents in a member's profile.
  * 
@@ -42,7 +42,7 @@
  */
 
 //Fehlermeldungen anzeigen
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 
 try {
     require_once(__DIR__ . '/../../system/common.php');
