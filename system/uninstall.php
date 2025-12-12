@@ -93,22 +93,45 @@ try {
             // Sicherheitsabfrage wurde bestätigt, es darf alles gelöscht werden
 
             try {
-                $templateFile = ADMIDIO_PATH . FOLDER_THEMES . '/simple/templates/modules/profile.view'; // ADMIDIO_PATH funktioniert ohne allow_url_open (PHP.ini)
+                // Dateiänderungen in profile.view.tpl und profile.php wieder rückgängig machen
+                
+                // ADMIDIO_PATH funktioniert ohne allow_url_open (PHP.ini)
+                $templateFile = ADMIDIO_PATH . FOLDER_THEMES . '/simple/templates/modules/profile.view'; 
                 $profileFile = ADMIDIO_PATH . FOLDER_MODULES . '/profile/profile';
+                $zeilenumbruch = "\r\n";
+                
+                $templateString = file_get_contents($templateFile . '.tpl');
+                
+                // diese Texte wurden bei der Installation in die profile.view.tpl eingefügt
+                $substArray = array(
+                    '{include file="../../../..' . FOLDER_PLUGINS . PLUGIN_FOLDER  .'/templates/profile.view.include.button.plugin.documents.tpl"}'.$zeilenumbruch,
+                    '{include file="../../../..' . FOLDER_PLUGINS . PLUGIN_FOLDER  .'/templates/profile.view.include.documents.tab.plugin.documents.tpl"}'.$zeilenumbruch,
+                    '{include file="../../../..' . FOLDER_PLUGINS . PLUGIN_FOLDER  .'/templates/profile.view.include.documents.accordion.plugin.documents.tpl"}'.$zeilenumbruch
+                );
+                
+                // eingefügte Texte durch '' ersetzen
+                foreach ($substArray as $subst) {
+                    $templateString = str_replace($subst, '', $templateString);
+                }
+                file_put_contents($templateFile . '.tpl', $templateString);
 
-                FileSystemUtils::copyFile($templateFile . '_documents_save.tpl', $templateFile . '.tpl', array(
-                    'overwrite' => true
-                ));
+                $profileString = file_get_contents($profileFile . '.php');
+                
+                // dieser Text wurde bei der Installation in die profile.view.tpl eingefügt
+                $subst = "require_once(ADMIDIO_PATH . FOLDER_PLUGINS .'" .PLUGIN_FOLDER . "/system/documents.php');".$zeilenumbruch;
+                
+                // eingefügten Text durch '' ersetzen
+                $profileString = str_replace($subst, '' ,  $profileString);
+                
+                file_put_contents($profileFile . '.php', $profileString);
+                
+                // die bei der Installation angelegten Sicherungsdateien wieder löschen
                 FileSystemUtils::deleteFileIfExists($templateFile . '_documents_save.tpl');
-
-                FileSystemUtils::copyFile($profileFile . '_documents_save.php', $profileFile . '.php', array(
-                    'overwrite' => true
-                ));
                 FileSystemUtils::deleteFileIfExists($profileFile . '_documents_save.php');
 
                 $result .= $gL10n->get('PLG_DOCUMENTS_UNINST_FILE_CHANGES_SUCCESS');
 
-                // Konfigurationsdaten löschen (nur in aktueller Organisation)
+                // Konfigurationsdaten löschen
                 $result_data = false;
                 $result_db = false;
 
