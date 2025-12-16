@@ -9,8 +9,8 @@
  *
  * Parameters:
  *
- * mode     : security_check - security check
- *            uninst - uninstallation procedure
+ * mode     : security_check    - security check
+ *            uninst            - uninstallation procedure
  *
  ***********************************************************************************************
  */
@@ -71,7 +71,7 @@ try {
 
             $form->addButton('btn_exit', $gL10n->get('SYS_YES'), array(
                 'icon' => 'bi-check-square',
-                'link' => SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . DOC_PLUGIN_FOLDER . '/system/uninstall.php', array(
+                'link' => SecurityUtils::encodeUrl(ADMIDIO_URL . FOLDER_PLUGINS . PDS_PLUGIN_FOLDER . '/system/uninstall.php', array(
                     'mode' => 'uninst'
                 )),
                 'class' => 'btn-primary'
@@ -104,9 +104,9 @@ try {
                 
                 // diese Texte wurden bei der Installation in die profile.view.tpl eingefügt
                 $substArray = array(
-                    '{include file="../../../..' . FOLDER_PLUGINS . DOC_PLUGIN_FOLDER  .'/templates/profile.view.include.button.plugin.documents.tpl"}'.$zeilenumbruch,
-                    '{include file="../../../..' . FOLDER_PLUGINS . DOC_PLUGIN_FOLDER  .'/templates/profile.view.include.documents.tab.plugin.documents.tpl"}'.$zeilenumbruch,
-                    '{include file="../../../..' . FOLDER_PLUGINS . DOC_PLUGIN_FOLDER  .'/templates/profile.view.include.documents.accordion.plugin.documents.tpl"}'.$zeilenumbruch
+                    '{include file="../../../..' . FOLDER_PLUGINS . PDS_PLUGIN_FOLDER  .'/templates/profile.view.include.button.plugin.documents.tpl"}'.$zeilenumbruch,
+                    '{include file="../../../..' . FOLDER_PLUGINS . PDS_PLUGIN_FOLDER  .'/templates/profile.view.include.documents.tab.plugin.documents.tpl"}'.$zeilenumbruch,
+                    '{include file="../../../..' . FOLDER_PLUGINS . PDS_PLUGIN_FOLDER  .'/templates/profile.view.include.documents.accordion.plugin.documents.tpl"}'.$zeilenumbruch
                 );
                 
                 // eingefügte Texte durch '' ersetzen
@@ -118,7 +118,7 @@ try {
                 $profileString = file_get_contents($profileFile . '.php');
                 
                 // dieser Text wurde bei der Installation in die profile.view.tpl eingefügt
-                $subst = "require_once(ADMIDIO_PATH . FOLDER_PLUGINS .'" .DOC_PLUGIN_FOLDER . "/system/documents.php');".$zeilenumbruch;
+                $subst = "require_once(ADMIDIO_PATH . FOLDER_PLUGINS .'" .PDS_PLUGIN_FOLDER . "/system/documents.php');".$zeilenumbruch;
                 
                 // eingefügten Text durch '' ersetzen
                 $profileString = str_replace($subst, '' ,  $profileString);

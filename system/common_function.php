@@ -14,8 +14,8 @@ if (basename($_SERVER['SCRIPT_FILENAME']) === 'common_function.php') {
 
 require_once (__DIR__ . '/../../../system/common.php');
 
-if (! defined('DOC_PLUGIN_FOLDER')) {
-    define('DOC_PLUGIN_FOLDER', '/' . substr(dirname(__DIR__), strrpos(dirname(__DIR__), DIRECTORY_SEPARATOR) + 1));
+if (! defined('PDS_PLUGIN_FOLDER')) {
+    define('PDS_PLUGIN_FOLDER', '/' . substr(dirname(__DIR__), strrpos(dirname(__DIR__), DIRECTORY_SEPARATOR) + 1));
 }
 
 if (! function_exists('myAutoloader')) {

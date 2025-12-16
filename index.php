@@ -3,7 +3,7 @@
  ***********************************************************************************************
  * Documents / Dokumente
  *
- * Version 2.0
+ * Version 2.1
  *
  * This plugin lists member related documents in a member's profile.
  * 
@@ -30,9 +30,9 @@
  * 
  * Usage:
  * 
- * To install, run the file .../system/install.php.
+ * To install, run the file .../Documents/system/install.php.
  * 
- * All further settings are made in the built-in Preferences routine.
+ * All further settings are made in the built-in preferences routine.
  *
  *
  * @copyright rmb
@@ -48,7 +48,7 @@ try {
     require_once(__DIR__ . '/../../system/common.php');
     require_once(__DIR__ . '/system/common_function.php');
 
-    $urlInst =  ADMIDIO_URL . FOLDER_PLUGINS . DOC_PLUGIN_FOLDER. '/system/install.php';
+    $urlInst =  ADMIDIO_URL . FOLDER_PLUGINS . PDS_PLUGIN_FOLDER. '/system/install.php';
     
     $gMessage->show($gL10n->get('PLG_DOCUMENTS_CALLING_DIRECTLY_INFO', array('<a href="' . $urlInst .'">' . $urlInst . '</a>')));
                           

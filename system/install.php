@@ -40,9 +40,9 @@ try {
 
             // diese Texte in die profile.view.tpl einfügen ($needle => $subst)
             $substArray = array(
-                '{if $showRelations}' => '{include file="../../../..' . FOLDER_PLUGINS . DOC_PLUGIN_FOLDER  .'/templates/profile.view.include.button.plugin.documents.tpl"}'.$zeilenumbruch,
-                '<!-- User Relations Tab -->' => '{include file="../../../..' . FOLDER_PLUGINS . DOC_PLUGIN_FOLDER  .'/templates/profile.view.include.documents.tab.plugin.documents.tpl"}'.$zeilenumbruch,
-                '<!-- User Relations Accordion -->' => '{include file="../../../..' . FOLDER_PLUGINS . DOC_PLUGIN_FOLDER  .'/templates/profile.view.include.documents.accordion.plugin.documents.tpl"}'.$zeilenumbruch
+                '{if $showRelations}' => '{include file="../../../..' . FOLDER_PLUGINS . PDS_PLUGIN_FOLDER  .'/templates/profile.view.include.button.plugin.documents.tpl"}'.$zeilenumbruch,
+                '<!-- User Relations Tab -->' => '{include file="../../../..' . FOLDER_PLUGINS . PDS_PLUGIN_FOLDER  .'/templates/profile.view.include.documents.tab.plugin.documents.tpl"}'.$zeilenumbruch,
+                '<!-- User Relations Accordion -->' => '{include file="../../../..' . FOLDER_PLUGINS . PDS_PLUGIN_FOLDER  .'/templates/profile.view.include.documents.accordion.plugin.documents.tpl"}'.$zeilenumbruch
             );
             foreach ($substArray as $needle => $subst) {
                 $templateString = substr_replace($templateString, $subst, strpos($templateString, $needle), 0);
@@ -72,7 +72,7 @@ try {
 
             // diesen Text in die profile.view.tpl einfügen
             $needle = '$page->show();';
-            $subst = "require_once(ADMIDIO_PATH . FOLDER_PLUGINS .'" .DOC_PLUGIN_FOLDER . "/system/documents.php');";
+            $subst = "require_once(ADMIDIO_PATH . FOLDER_PLUGINS .'" .PDS_PLUGIN_FOLDER . "/system/documents.php');";
             $profileString = substr_replace($profileString, $subst . $zeilenumbruch, strpos($profileString, $needle), 0);
             
             // PHP-Datei wieder schreiben

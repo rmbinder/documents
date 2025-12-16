@@ -22,4 +22,4 @@ The plugin checks whether the sequential number of a document matches the member
 
 1. Create a folder named 'Documents' under adm_plugins
 2. Copy all plugin files into this folder (If the folder already exists, you only need to replace all the files within it.)
-3. To install (or update) , run the following PHP file: .../adm_plugins/Documents/system/install.php
+3. To install or update, run the following PHP file: .../adm_plugins/Documents/system/install.php
